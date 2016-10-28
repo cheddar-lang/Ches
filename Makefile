@@ -28,8 +28,8 @@ build: $(JC)
 	$(JC) $(JCFLAGS) --source-maps
 	$(BIN_MAKE)
 
-test: $(TESTRUNNER)
-	$(TESTRUNNER) $(TFLAGS)
+test: $(TESTRUNNER) ;
+#	$(TESTRUNNER) $(TFLAGS)
 
 clean:
 	rm -rf ./dist/
