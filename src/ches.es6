@@ -59,7 +59,6 @@ if (!module.parent) {
         });
     }
     else {
-        var c = require('./prog');
         var STDIN = "";
         var chunk;
         process.stdin.setEncoding('utf8');
