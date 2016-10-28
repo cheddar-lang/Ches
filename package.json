@@ -1,0 +1,54 @@
+{
+  "name": "cheddar-parser",
+  "description": "The parser for Cheddar",
+  "homepage": "http://cheddar.vihan.org/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheddar-lang/Ches.git"
+  },
+  "author": "Vihan <contact@vihan.org> (http://vihan.org/)",
+  "tags": [
+    "javascript",
+    "language",
+    "interpreter",
+    "cheddar",
+    "cheese",
+    "food"
+  ],
+  "version": "0.1.0",
+  "dependencies": {},
+  "bin": {
+    "cheddar-parser": "dist/ches.js"
+  },
+  "scripts": {
+    "prepublish": "make",
+    "build": "make build",
+    "test": "make test",
+    "start": "node ./dist/ches.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.13.2",
+    "babel-istanbul": "^0.11.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-include": "^1.2.0",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-preset-es2015": "^6.13.2",
+    "browserify": "^13.1.0",
+    "chai": "^3.5.0",
+    "install": "^0.8.1",
+    "mocha": "^3.0.1",
+    "npm": "^3.10.6"
+  },
+  "main": "dist/ches",
+  "directories": {
+    "test": "test"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cheddar-lang/Ches/issues"
+  },
+  "config": {
+    "unsafe-perm": true
+  }
+}

@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- 4.4.0
+- 5.5.0
+- node
+env:
+- CXX=g++-4.8
+install:
+- npm install
+deploy:
+  provider: npm
+  email: contact@vihan.org
+  api_key:
+    secure: yBAK9KH9tp3GCMrkSTnX585IA+F+dtzNh5XVa4xxekVU7dFQHly+8ZDiFbVsMu671atjYQ2hDbGP6Ua8QSX3h4iZiXh/8829okm87UJyxcpjPETJcOIgSY47dFcrybEEEzJyEZsNAcTcrOihB6ww/Quqtf4bTbuyVN+TSIVyPaa8hxbAXLghO/SOdZMDStQw/TIJ1xtyEUZ3fCnkCYnxoBr6C/FQSzr5JqOzswqlmYWgeZG9qjbKK9q7NRLepnDFLHnfGL+7DoUyh2fIA2SYYfFdaFDs67ZfmP9M/3NfAxxlesvI51iFuhwWZie7jcsCr6ZQBSsv8ZmCx0EKP5FVQogOWRscE/nSbnSFNk0RPMlHRHqPqA1+V85OeWCJWTudpmhe/C923BHx4wkrkHKTP8dQH6DHK6RjqOwIA4BFdlK3mCipO3rfToGjnLCYYTw3mPH1E0iIjRDyMGodP3mkjbXdIq/lbB2ZH3WiTE58ljK8XjwEddhiul1+NjqZ8GLXbxCKmE2nHxST7dwQL3HzFhqyIcK70VZ7gd0SJbpYgBF23wzII1/7v9H7BgaVm/UqLIoreHQthCRn0kbvbtklxou2zAtEId8qPIZEr8EudQd9uydeWdhafOfRQNo6GqHauGVkkT6V6x1aN/UjSXvr/rlUFGI3NEFWI5Xev5NvLxw=
+  on:
+    tags: true
+    repo: cheddar-lang/Ches
+    branch: master
