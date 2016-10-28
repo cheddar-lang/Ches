@@ -100,7 +100,12 @@ if (!module.parent) {
                 Identifier: require('./parsers/var'),
 
                 // Important things
-                Lexer: require('./tok/lex')
+                Lexer: require('./tok/lex'),
+
+                // Helpers
+                Helpers: {
+                    Locate: require('./helpers/loc')
+                }
             });
         }
 
