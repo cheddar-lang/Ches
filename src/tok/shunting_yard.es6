@@ -22,19 +22,19 @@ export default class CheddarShuntingYard extends CheddarLexer {
         while (
             current &&
             current._Tokens.length === 2 &&
-            (current.tok(1).isExpression || // prevents import recursion
-                current.tok(1) instanceof CheddarShuntingYard)
+            (current._Tokens[1].isExpression || // prevents import recursion
+                current._Tokens[1] instanceof CheddarShuntingYard)
         ) {
-            if (current.tok().isExpression) //TODO: code, index
-                tokens.push(new CheddarShuntingYard().exec(current.tok()));
+            if (current._Tokens[0].isExpression) //TODO: code, index
+                tokens.push(new CheddarShuntingYard().exec(current._Tokens[0]));
             else
-                tokens.push(current.tok());
-            if (current.tok(1) instanceof CheddarShuntingYard) {
-                tokens.push(current.tok(1));
+                tokens.push(current._Tokens[0]);
+            if (current._Tokens[1] instanceof CheddarShuntingYard) {
+                tokens.push(current._Tokens[1]);
                 current = null;
                 break;
             } else
-                current = current.tok(1);
+                current = current._Tokens[1];
             //TODO: make sure this covers all cases; otherwise, see when this doesn't work
         }
 
@@ -45,10 +45,10 @@ export default class CheddarShuntingYard extends CheddarLexer {
 
         if (current &&
             current._Tokens.length === 1) {
-            if (current.tok().isExpression)
-                tokens.push(new CheddarShuntingYard().exec(current.tok()));
+            if (current._Tokens[0].isExpression)
+                tokens.push(new CheddarShuntingYard().exec(current._Tokens[0]));
             else
-                tokens.push(current.tok());
+                tokens.push(current._Tokens[0]);
         }
 
         // Reorder tokens
@@ -60,10 +60,10 @@ export default class CheddarShuntingYard extends CheddarLexer {
                 previousPrecedence = 0;
             if (token instanceof CheddarShuntingYard) {
                 for (let i = 0; i < token._Tokens.length; i++)
-                    this.Tokens = token.tok(i);
+                    this.Tokens = token._Tokens[i];
                 unary = false;
             } else if (token instanceof CheddarOperatorToken) { // It's an operator
-                if (RA_PRECEDENCE.has(token.tok(0)))
+                if (RA_PRECEDENCE.has(token._Tokens[0]))
                     token.Tokens = TYPE.RTL;
                 else if (unary)
                     token.Tokens = TYPE.UNARY;
@@ -71,19 +71,19 @@ export default class CheddarShuntingYard extends CheddarLexer {
                     token.Tokens = TYPE.LTR;
 
                 let precedence;
-                switch (token.tok(1)) {
+                switch (token._Tokens[1]) {
                     case TYPE.RTL:
-                        precedence = RA_PRECEDENCE.get(token.tok());
+                        precedence = RA_PRECEDENCE.get(token._Tokens[0]);
                         break;
                     case TYPE.UNARY:
-                        precedence = UNARY_PRECEDENCE.get(token.tok());
+                        precedence = UNARY_PRECEDENCE.get(token._Tokens[0]);
                         break;
                     case TYPE.LTR:
-                        precedence = PRECEDENCE.get(token.tok());
+                        precedence = PRECEDENCE.get(token._Tokens[0]);
                         break;
                 }
 
-                let minus = token.tok(1) == TYPE.RTL ? 0 : 1;
+                let minus = token._Tokens[1] == TYPE.RTL ? 0 : 1;
                 previousPrecedence = precedences[precedences.length - 1];
                 while (precedence - minus < previousPrecedence) {
                     this.Tokens = operators.pop();
