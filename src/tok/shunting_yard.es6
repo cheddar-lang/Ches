@@ -62,7 +62,7 @@ export default class CheddarShuntingYard extends CheddarLexer {
                 for (let i = 0; i < token._Tokens.length; i++)
                     this.Tokens = token._Tokens[i];
                 unary = false;
-            } else if (token instanceof CheddarOperatorToken) { // It's an operator
+            } else if (token.constructor.name === "CheddarOperatorToken") { // It's an operator
                 if (RA_PRECEDENCE.has(token._Tokens[0]))
                     token.Tokens = TYPE.RTL;
                 else if (unary)
