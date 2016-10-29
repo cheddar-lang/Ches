@@ -3,7 +3,7 @@ import CheddarCustomLexer from './custom';
 import CheddarLexer from '../tok/lex';
 
 let expr = CheddarCustomLexer(CheddarExpressionToken, true);
-export default class CheddarParenthesizedExpression extends CheddarLexer {
+export default class CheddarParenthesizedExpressionToken extends CheddarLexer {
     exec() {
         this.open(false);
 
