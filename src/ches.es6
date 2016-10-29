@@ -96,7 +96,7 @@ if (!module.parent) {
 
                 // Things to do with variables
                 Property: require('./parsers/property'),
-                Identifier: require('./parsers/var'),
+                Identifier: require('./literals/var'),
 
                 // Important things
                 Lexer: require('./tok/lex'),
