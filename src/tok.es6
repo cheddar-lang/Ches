@@ -14,7 +14,8 @@ import S2_IF from './states/if';
 import S2_FOR from './states/for';
 import S3_FUNC from './states/func';
 import S4_CLASS from './states/class';
-import S5_EXPR from './states/expr';
+import S5_OP from './states/op';
+import S6_EXPR from './states/expr';
 
 var CLOSES = '\n;';
 
@@ -38,7 +39,8 @@ export default class CheddarTokenize extends CheddarLexer {
             S2_FOR,
             S3_FUNC,
             S4_CLASS,
-            S5_EXPR
+            S5_OP,
+            S6_EXPR
         ]), {
             tok: this.constructor,
             args: { ENDS, PARSERS }
