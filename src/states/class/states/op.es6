@@ -9,9 +9,16 @@ import {KEEP_ITEM} from '../../../consts/err';
 
 import {UOP, OP} from '../../../consts/ops';
 
+import StatementReturn from '../../return';
+
 export default class ClassStateOp extends CheddarLexer {
     exec(tokenizer) {
         this.open(false);
+
+
+        if (tokenizer) {
+            tokenizer.args.PARSERS.unshift(StatementReturn);
+        }
 
         return this.grammar(true,
             [
