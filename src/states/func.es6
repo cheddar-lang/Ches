@@ -8,7 +8,7 @@ import StatementReturn from './return';
 
 import * as CheddarError from '../consts/err';
 
-const A = CheddarCustomLexer(CheddarArrayToken, '(', ')', CheddarArgumentToken, true);
+const A = CheddarCustomLexer(CheddarArrayToken, '(', ')', CheddarArgumentToken, true, true);
 
 export default class StatementFunc extends CheddarLexer {
     exec(tokenizer) {

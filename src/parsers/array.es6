@@ -7,10 +7,19 @@ import CheddarPrimitive from '../literals/primitive';
 import {ClassType} from '../consts/types';
 
 export default class CheddarArrayToken extends CheddarPrimitive {
-    exec(OPEN = ARRAY_OPEN, CLOSE = ARRAY_CLOSE, PARSER = CheddarExpressionToken, LOOSE = false) {
+    exec(OPEN = ARRAY_OPEN, CLOSE = ARRAY_CLOSE, PARSER = CheddarExpressionToken, LOOSE = false, ALLOW_NONE = false) {
+
         var c = this.getChar();
         if (c !== OPEN)
             return this.error(CheddarError.EXIT_NOTFOUND);
+        
+        this.jumpWhite();
+
+        if (ALLOW_NONE && this.Code[this.Index] === CLOSE) {
+            this.Index++;
+            return this.close();
+        }
+
         while (true) {
 
             this.jumpWhite();
