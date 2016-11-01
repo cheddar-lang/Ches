@@ -93,6 +93,8 @@ if (!module.parent) {
 
                 Boolean: require('./literals/boolean'),
                 Nil: require('./literals/nil'),
+                NaN: require('./literals/nan'),
+                Infinity: require('./literals/infinity'),
 
                 // Things to do with variables
                 Property: require('./parsers/property'),

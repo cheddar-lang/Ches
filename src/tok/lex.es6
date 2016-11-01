@@ -8,9 +8,14 @@ export default class CheddarLexer {
         this._Tokens = [];
     }
 
-    toAST() {
+    toAST(padding = '') {
+        let result = padding + this.constructor.name.replace(/^Cheddar/g, '') + '\n';
+
+        padding = padding.replace(/├$/, '|').replace(/└$/, ' ');
+
         let node = this,
-            tokens = this._Tokens;
+            tokens = this._Tokens,
+            newPadding = padding + '├';
 
         while (tokens.length === 1 && tokens[0].isExpression) {
             node = tokens[0];
@@ -22,12 +27,19 @@ export default class CheddarLexer {
             tokens = tokens[0]._Tokens;
         }
 
-        return node.constructor.name.replace(/^Cheddar/g, '') + '\n' + tokens.map(t => typeof t === 'string'  ? "'" + t + "'" : t)
-            .map(t => t.toAST ? t.toAST() : t.toString())
-            .join(tokens.every(o => !(o instanceof CheddarLexer)) ? ' ' : '\n')
-            .replace(/^/gm, ' │')
-            .replace(/^ │(?! [└├│┬])/gm, ' ├ ');
-            //.replace(/^((?: [^└├│┬])*)├/gm, '└'); //wait only the last one
+        let separator = tokens.some(token => token instanceof CheddarLexer) ? '\n' : ' ';
+        if (separator === ' ')
+            result += padding + '└';
+
+        for (let item of tokens.slice(0, -1))
+            result += (item.toAST ? item.toAST(newPadding) : typeof item === 'string' ? "'" + item + "'" : item) + separator;
+
+        if (tokens.length) {
+            let item = tokens[tokens.length - 1];
+            result += item.toAST ? item.toAST(padding + '└') : typeof item === 'string' ? "'" + item + "'" : item;
+        }
+
+        return result;
     }
 
     getChar() {
