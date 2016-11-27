@@ -14,7 +14,7 @@ export const RESERVED_KEYWORDS = new Set([
     'log',
     'has',
     'floor', 'ceil', 'round',
-    'abs', 'repr',
+    'abs',
     'sign', 'print',
     'what', 'is', 'actually',
     'as',
