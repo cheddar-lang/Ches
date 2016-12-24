@@ -384,6 +384,7 @@ export default class CheddarLexer {
                     return false;
             }
 
+            this.Index--;
             return true;
         } else {
             return false;
@@ -395,18 +396,18 @@ export default class CheddarLexer {
     _jumpBlockComment() {
         let nextStart, nextEnd,
             depth = 1,
-            newIndex = this.Index + 2;
-        while (depth) {
+            newIndex = this.Index; // Position after the block comment
+        while (depth > 0) {
             nextStart = this.Code.indexOf('/*', newIndex);
             nextEnd = this.Code.indexOf('*/', newIndex);
-            if (nextStart < nextEnd) {
+            if (nextStart < nextEnd && nextStart !== -1) {
                 depth++;
                 newIndex = nextStart + 2;
             } else {
                 depth--;
                 newIndex = nextEnd + 2;
             }
-            if (nextEnd === -1)
+            if (nextEnd === -1 || !this.curchar)
                 return this.error(CheddarError.UNEXPECTED_TOKEN);
         }
         this.Index = newIndex;
